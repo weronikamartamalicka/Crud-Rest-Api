@@ -4,12 +4,9 @@ import com.crud.tasks.dbservice.DbService;
 import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/v1/tasks")
@@ -25,6 +22,7 @@ public class TaskController {
         List<Task> taskList = dbService.getAllTasks();
         return taskMapper.mapToTaskDtoList(taskList);
     }
+
 
     @GetMapping
     public TaskDto getTask(Long taskId) {
