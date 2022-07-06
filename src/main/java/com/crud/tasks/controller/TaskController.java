@@ -14,13 +14,14 @@ import java.util.List;
 @RequestMapping("/v1/tasks")
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class TaskController {
 
     private final TaskMapper taskMapper;
     private final DbService dbService;
 
 
-    @GetMapping( "getAll")
+    @GetMapping( "getTasks")
     public ResponseEntity<List<TaskDto>> getTasks() {
         List<Task> taskList = dbService.getAllTasks();
         return ResponseEntity.ok(taskMapper.mapToTaskDtoList(taskList));
@@ -38,14 +39,14 @@ public class TaskController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(path = "updateTask")
+    @PutMapping(path = "updateTask", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TaskDto> updateTask(@RequestBody TaskDto taskDto) {
         Task task = taskMapper.mapToTask(taskDto);
         Task savedTask = dbService.saveTask(task);
         return ResponseEntity.ok(taskMapper.mapToTaskDto(savedTask));
     }
 
-    @PostMapping(path = "createTask", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path ="createTask", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createTask(@RequestBody TaskDto taskDto) {
         Task task = taskMapper.mapToTask(taskDto);
         dbService.saveTask(task);
