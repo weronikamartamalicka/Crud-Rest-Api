@@ -10,11 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-
+@CrossOrigin("*")
 @RequestMapping("/v1/trello")
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin("*")
 public class TrelloController {
 
     private final TrelloService trelloService;
@@ -25,10 +24,10 @@ public class TrelloController {
         return ResponseEntity.ok(trelloService.fetchTrelloBoards());
     }
 
-    @PostMapping("createTrelloCard")
-    public ResponseEntity<CreatedTrelloCard> createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
-
-        return ResponseEntity.ok(trelloService.createTrelloCard(trelloCardDto));
-    }
+//    @PostMapping("createTrelloCard")
+//    public ResponseEntity<CreatedTrelloCard> createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
+//
+//        return ResponseEntity.ok(trelloService.createTrelloCard(trelloCardDto));
+//    }
 
 }
