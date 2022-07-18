@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 public class TrelloFacade {
     private final TrelloService trelloService;
     private final TrelloMapper trelloMapper;
-
     private final TrelloValidator trelloValidator;
 
     public List<TrelloBoardDto> fetchTrelloBoards() {
