@@ -22,8 +22,7 @@ public class DbService {
         return taskRepository.findById(taskId).orElseThrow(TaskNotFoundException::new);
     }
 
-    public Task saveTask(final Task task)  {//throws TaskNotFoundException{
-        //taskRepository.findById(task.getId()).orElseThrow(TaskNotFoundException::new);
+    public Task saveTask(final Task task)  {
         return taskRepository.save(task);
     }
 
