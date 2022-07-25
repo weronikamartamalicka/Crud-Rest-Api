@@ -36,26 +36,12 @@ public class SimpleEmailService {
         }
     }
 
-//    private SimpleMailMessage createMailMessage(final Mail mail) {
-//
-//        SimpleMailMessage mailMessage = new SimpleMailMessage();
-//        mailMessage.setTo(mail.getMailTo());
-//        Optional toCc =Optional.of(mail.getToCc());
-//        if(toCc.isPresent()) {
-//            mailMessage.setCc(mail.getToCc());
-//        }
-//        mailMessage.setSubject(mail.getSubject());
-//        mailMessage.setText(mail.getMessage());
-//
-//        return mailMessage;
-//    }
-
     private MimeMessagePreparator createMimeMessage(final Mail mail) {
         return mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
-            messageHelper.setText(mail.getMessage());
+            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
         };
 
     }

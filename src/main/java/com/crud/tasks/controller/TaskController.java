@@ -10,8 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @CrossOrigin("*")
-@RequestMapping("/v1/tasks")
+@RequestMapping("/v1")
 @RestController
 @RequiredArgsConstructor
 
@@ -21,31 +24,31 @@ public class TaskController {
     private final DbService dbService;
 
 
-    @GetMapping()
+    @RequestMapping(method = RequestMethod.GET, value = "/tasks")
     public ResponseEntity<List<TaskDto>> getTasks() {
         List<Task> taskList = dbService.getAllTasks();
         return ResponseEntity.ok(taskMapper.mapToTaskDtoList(taskList));
     }
 
-    @GetMapping(value = "{taskId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/tasks/{taskId}")
     public ResponseEntity<TaskDto> getTask(@PathVariable Long taskId) throws TaskNotFoundException {
         return ResponseEntity.ok(taskMapper.mapToTaskDto(dbService.getTaskById(taskId)));
     }
 
-    @DeleteMapping(value = "{taskId}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/tasks/{taskId}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long taskId) {
         dbService.deleteTaskById(taskId);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "/tasks", consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<TaskDto> updateTask(@RequestBody TaskDto taskDto) {
         Task task = taskMapper.mapToTask(taskDto);
         Task savedTask = dbService.saveTask(task);
         return ResponseEntity.ok(taskMapper.mapToTaskDto(savedTask));
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.PUT, value = "/tasks")
     public ResponseEntity<Void> createTask(@RequestBody TaskDto taskDto) {
         Task task = taskMapper.mapToTask(taskDto);
         dbService.saveTask(task);
