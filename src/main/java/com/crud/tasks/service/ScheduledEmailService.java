@@ -9,11 +9,11 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
-
 @Slf4j
 @Service
 @AllArgsConstructor
-public class SimpleEmailService {
+public class ScheduledEmailService {
+
     private JavaMailSender mailSender;
     private MailCreatorService mailCreatorService;
 
@@ -34,7 +34,7 @@ public class SimpleEmailService {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
-            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+            messageHelper.setText(mailCreatorService.buildScheduledCardEmail(mail.getMessage()), true);
         };
 
     }
