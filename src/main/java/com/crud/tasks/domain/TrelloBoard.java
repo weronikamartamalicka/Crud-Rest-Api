@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 public class TrelloBoard {
 
-    private String name;
     private String id;
+    private String name;
     private List<TrelloList> trelloList;
 }

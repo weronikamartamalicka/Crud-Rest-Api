@@ -35,7 +35,7 @@ public class TrelloClient {
                         trelloConfig.getTrelloUser() + "/boards")
                 .queryParam("key", trelloConfig.getTrelloAppKey())
                 .queryParam("token", trelloConfig.getTrelloToken())
-                .queryParam("fields", "id, name")
+                .queryParam("fields", "name, id")
                 .queryParam("lists", "all")
                 .build()
                 .encode()
