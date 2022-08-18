@@ -47,9 +47,9 @@ public class TrelloClient {
                     .map(Arrays::asList)
                     .orElse(Collections.emptyList())
                     .stream()
-                    .filter(trelloBoardDto -> Objects.nonNull(trelloBoardDto.getId())
-                            && Objects.nonNull(trelloBoardDto.getName()))
-                    .filter(trelloBoardDto -> trelloBoardDto.getName().contains("Kodilla"))
+//                    .filter(trelloBoardDto -> Objects.nonNull(trelloBoardDto.getId())
+//                            && Objects.nonNull(trelloBoardDto.getName()))
+//                    .filter(trelloBoardDto -> trelloBoardDto.getName().contains("Kodilla"))
                     .collect(Collectors.toList());
         } catch(RestClientException e) {
             LOGGER.error(e.getMessage(), e);
